@@ -11,6 +11,10 @@ from PyQt5.QtWidgets import QLabel, QGridLayout
 # QPushButton - przycisk
 # QHBoxLayout - układ horyzontalny
 from PyQt5.QtWidgets import QLineEdit, QPushButton, QHBoxLayout
+# QMessageBox - tworzenie komunikatów
+from PyQt5.QtWidgets import QMessageBox
+# Qt - tworzenie przestrzeni nazw z różnymi stałymi
+from PyQt5.QtCore import Qt
 
 
 # kalkulator - wygląd okna aplikacji
@@ -40,8 +44,8 @@ class Kalkulator(QWidget):
         self.wynikEdit.setToolTip('Wpisz <b>liczby</b> i wybierz działanie...') # setToolTip - ustawia podpowiedź
 
         układT.addWidget(self.liczba1Edit, 1, 0)
-        układT.addWidget(self.liczba1Edit, 1, 1)
-        układT.addWidget(self.liczba1Edit, 1, 2)
+        układT.addWidget(self.liczba2Edit, 1, 1)
+        układT.addWidget(self.wynikEdit, 1, 2)
 
         # przyciski
         dodajP = QPushButton("Dodaj", self)
@@ -66,12 +70,15 @@ class Kalkulator(QWidget):
         # przypisanie ukladu do okna
         self.setLayout(układT)
 
+        koniecP.clicked.connect(self.koniec)
 
         self.setGeometry(20, 20, 300, 100) # szerokość, wysokość okna
         self.setWindowIcon(QIcon('kalkulator.png')) # tytuł w pasku tytułowym
         self.setWindowTitle("Prosty kalkulator") # tytuł
         self.show() # wyśwwietlenie okna
 
+    def koniec(self):
+        sys.close()
 
 if __name__ == '__main__':
     import sys
